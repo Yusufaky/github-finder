@@ -1,19 +1,20 @@
 import { useState, useContext } from "react";
 import GithubContext from "../../context/github/GithubContext";
-// import { searchUsers } from "../../context/github/GithubActions";
 
 function UserSearch() {
   const [text, setText] = useState("");
-  const { users, searchUsers, clearUsers } = useContext(GithubContext);
+
+  const { users, searchUsers } = useContext(GithubContext);
 
   const handleChange = (e) => setText(e.target.value);
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (text === "") {
-      alert("Escrever Texto");
-      // setAlert("Please enter something", "light");
+      alert("Please enter something");
     } else {
       searchUsers(text);
+
       setText("");
     }
   };
@@ -42,13 +43,10 @@ function UserSearch() {
       </div>
       {users.length > 0 && (
         <div>
-          <button onClick={clearUsers} className="btn btn-ghost btn-lg">
-            Clear
-          </button>
+          <button className="btn btn-ghost btn-lg">Clear</button>
         </div>
       )}
     </div>
   );
 }
-
 export default UserSearch;
